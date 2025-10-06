@@ -2716,6 +2716,8 @@ function initializeFilterToggle() {
     const filterSidebar = document.getElementById('filterSidebar');
     const sidebarOverlay = document.getElementById('sidebarOverlay');
     const sidebarCloseBtn = document.getElementById('sidebarCloseBtn');
+    const applyFiltersBtn = document.getElementById('applyFiltersBtn');
+    const clearFiltersBtn = document.getElementById('clearFiltersBtn');
     
     if (filterToggleBtn && filterSidebar && sidebarOverlay && sidebarCloseBtn) {
         // Open sidebar
@@ -2740,6 +2742,32 @@ function initializeFilterToggle() {
             if (e.key === 'Escape' && filterSidebar.classList.contains('active')) {
                 closeSidebar();
             }
+        });
+    }
+    
+    // Apply filters button
+    if (applyFiltersBtn) {
+        applyFiltersBtn.addEventListener('click', function() {
+            // Apply current filters
+            applyFilters();
+            
+            // Close sidebar
+            if (filterSidebar) {
+                filterSidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+    
+    // Clear filters button
+    if (clearFiltersBtn) {
+        clearFiltersBtn.addEventListener('click', function() {
+            // Reset all filters to default
+            resetAllFilters();
+            
+            // Apply the reset filters
+            applyFilters();
         });
     }
 }
@@ -2978,6 +3006,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     setupEventListeners();
     animateCounters();
+    initializeFooter();
 });
 
 // Setup event listeners
@@ -3894,4 +3923,156 @@ function showNotification(message, type = 'info') {
             }
         }, 300);
     }, 3000);
+}
+
+// ========================================
+// FOOTER FUNCTIONALITY
+// ========================================
+
+// Initialize footer functionality
+function initializeFooter() {
+    // Footer category links
+    const footerCategoryLinks = document.querySelectorAll('.footer-links a[data-category]');
+    footerCategoryLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const category = link.getAttribute('data-category');
+            
+            // Close sidebar if open
+            const sidebar = document.getElementById('filterSidebar');
+            if (sidebar && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+                document.body.classList.remove('sidebar-open');
+            }
+            
+            // Set category filter
+            setCategoryFilter(category);
+            
+            // Scroll to courses
+            document.getElementById('coursesGrid').scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+    
+    // Footer skilling links
+    const footerSkillingLinks = document.querySelectorAll('.footer-links a[data-skilling]');
+    footerSkillingLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const skilling = link.getAttribute('data-skilling');
+            
+            // Close sidebar if open
+            const sidebar = document.getElementById('filterSidebar');
+            if (sidebar && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+                document.body.classList.remove('sidebar-open');
+            }
+            
+            // Set skilling filter
+            setSkillingFilter(skilling);
+            
+            // Scroll to courses
+            document.getElementById('coursesGrid').scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+    
+    // Footer export PDF link
+    const footerExportPdf = document.getElementById('footerExportPdf');
+    if (footerExportPdf) {
+        footerExportPdf.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('exportPdfBtn').click();
+        });
+    }
+    
+    // Footer test labs link
+    const footerTestLabs = document.getElementById('footerTestLabs');
+    if (footerTestLabs) {
+        footerTestLabs.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('testLabsBtn').click();
+        });
+    }
+}
+
+// Set category filter from footer
+function setCategoryFilter(category) {
+    // Remove active class from all category tabs
+    const categoryTabs = document.querySelectorAll('.filter-tab[data-category]');
+    categoryTabs.forEach(tab => tab.classList.remove('active'));
+    
+    // Add active class to selected category
+    const selectedTab = document.querySelector(`.filter-tab[data-category="${category}"]`);
+    if (selectedTab) {
+        selectedTab.classList.add('active');
+    }
+    
+    // Update current category
+    currentCategory = category;
+    
+    // Apply filters
+    applyFilters();
+}
+
+// Set skilling filter from footer
+function setSkillingFilter(skilling) {
+    // Remove active class from all skilling tabs
+    const skillingTabs = document.querySelectorAll('.filter-tab[data-skilling]');
+    skillingTabs.forEach(tab => tab.classList.remove('active'));
+    
+    // Add active class to selected skilling
+    const selectedTab = document.querySelector(`.filter-tab[data-skilling="${skilling}"]`);
+    if (selectedTab) {
+        selectedTab.classList.add('active');
+    }
+    
+    // Update current skilling
+    currentSkilling = skilling;
+    
+    // Apply filters
+    applyFilters();
+}
+
+// Reset all filters to default
+function resetAllFilters() {
+    // Reset filter variables
+    currentCategory = 'all';
+    currentSkilling = 'all';
+    currentLab = 'all';
+    currentSolutionArea = 'all';
+    currentSolutionPlay = 'all';
+    currentSearch = '';
+    currentSort = 'default';
+    activeFilters = [];
+    
+    // Reset all filter tabs to default state
+    const allTabs = document.querySelectorAll('.filter-tab');
+    allTabs.forEach(tab => {
+        tab.classList.remove('active');
+        // Set "all" tabs as active
+        if (tab.dataset.category === 'all' || 
+            tab.dataset.skilling === 'all' || 
+            tab.dataset.lab === 'all' || 
+            tab.dataset.solutionArea === 'all' || 
+            tab.dataset.solutionPlay === 'all') {
+            tab.classList.add('active');
+        }
+    });
+    
+    // Clear search input
+    const searchInput = document.getElementById('headerSearchInput');
+    if (searchInput) {
+        searchInput.value = '';
+    }
+    
+    // Reset sort dropdown
+    const sortSelect = document.getElementById('sortSelect');
+    if (sortSelect) {
+        sortSelect.value = 'default';
+    }
+    
+    // Clear filter chips
+    const filterChips = document.getElementById('filterChips');
+    if (filterChips) {
+        filterChips.innerHTML = '';
+    }
 }

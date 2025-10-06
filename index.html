@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FY26 GPS Course Catalog - Digital Catalogue</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=4">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -383,6 +383,18 @@
                             </div>
                         </div>
                     </div> <!-- End of sidebar-content -->
+                    
+                    <!-- Filter Actions -->
+                    <div class="filter-actions">
+                        <button class="btn btn-secondary" id="clearFiltersBtn">
+                            <i class="fas fa-times"></i>
+                            Clear All
+                        </button>
+                        <button class="btn btn-primary" id="applyFiltersBtn">
+                            <i class="fas fa-check"></i>
+                            Apply Filters
+                        </button>
+                    </div>
                 </div> <!-- End of filter-sidebar -->
             </div>
 
@@ -432,6 +444,34 @@
         </div>
     </div>
 
-    <script src="script.js?v=3"></script>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>© 2025 Microsoft Corporation</h3>
+                    </div>
+                </div>
+                
+                <div class="footer-nav">
+                    <a href="#">Terms</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Security</a>
+                    <a href="#">Status</a>
+                    <a href="#">Help</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Pricing</a>
+                    <a href="#">API</a>
+                    <a href="#">Training</a>
+                    <a href="#">Blog</a>
+                    <a href="#">About</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js?v=4"></script>
 </body>
 </html>
