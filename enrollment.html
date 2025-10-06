@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Enrollment - FY26 GPS Course Catalog</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h1>FY26 GPS Course Catalog</h1>
+                </div>
+                <div class="header-actions">
+                    <a href="index.html" class="back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Back to Catalog</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="enrollment-container">
+                <div class="enrollment-header">
+                    <h1>Course Enrollment</h1>
+                    <p>Complete your enrollment by providing the required information below</p>
+                </div>
+
+                <div class="enrollment-content">
+                    <div class="course-info-card">
+                        <div class="course-info-header">
+                            <h3 id="enrollmentCourseTitle">Course Title</h3>
+                            <div class="course-meta-info">
+                                <div class="course-duration-info">
+                                    <i class="fas fa-clock"></i>
+                                    <span id="enrollmentDuration">Duration</span>
+                                </div>
+                                <div class="course-price-info">
+                                    <i class="fas fa-tag"></i>
+                                    <span id="enrollmentPrice">Price</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form class="enrollment-form" id="enrollmentForm">
+                        <div class="form-section">
+                            <h3>Personal Information</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name *</label>
+                                    <input type="text" id="firstName" name="firstName" required>
+                                    <div class="error-message" id="firstNameError"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name *</label>
+                                    <input type="text" id="lastName" name="lastName" required>
+                                    <div class="error-message" id="lastNameError"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Email Address *</label>
+                                    <input type="email" id="email" name="email" required>
+                                    <div class="error-message" id="emailError"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number *</label>
+                                    <input type="tel" id="phone" name="phone" required>
+                                    <div class="error-message" id="phoneError"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Professional Information</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="company">Company/Organization</label>
+                                    <input type="text" id="company" name="company">
+                                </div>
+                                <div class="form-group">
+                                    <label for="jobTitle">Job Title</label>
+                                    <input type="text" id="jobTitle" name="jobTitle">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="experience">Years of Experience</label>
+                                <select id="experience" name="experience">
+                                    <option value="">Select Experience Level</option>
+                                    <option value="0-1">0-1 years</option>
+                                    <option value="2-5">2-5 years</option>
+                                    <option value="6-10">6-10 years</option>
+                                    <option value="11-15">11-15 years</option>
+                                    <option value="16+">16+ years</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Course Preferences</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="preferredDate">Preferred Start Date</label>
+                                    <input type="date" id="preferredDate" name="preferredDate">
+                                </div>
+                                <div class="form-group">
+                                    <label for="timezone">Timezone</label>
+                                    <select id="timezone" name="timezone">
+                                        <option value="">Select Timezone</option>
+                                        <option value="UTC-12">UTC-12 (Baker Island)</option>
+                                        <option value="UTC-11">UTC-11 (American Samoa)</option>
+                                        <option value="UTC-10">UTC-10 (Hawaii)</option>
+                                        <option value="UTC-9">UTC-9 (Alaska)</option>
+                                        <option value="UTC-8">UTC-8 (Pacific)</option>
+                                        <option value="UTC-7">UTC-7 (Mountain)</option>
+                                        <option value="UTC-6">UTC-6 (Central)</option>
+                                        <option value="UTC-5">UTC-5 (Eastern)</option>
+                                        <option value="UTC-4">UTC-4 (Atlantic)</option>
+                                        <option value="UTC-3">UTC-3 (Brazil)</option>
+                                        <option value="UTC-2">UTC-2 (Mid-Atlantic)</option>
+                                        <option value="UTC-1">UTC-1 (Azores)</option>
+                                        <option value="UTC+0">UTC+0 (GMT)</option>
+                                        <option value="UTC+1">UTC+1 (CET)</option>
+                                        <option value="UTC+2">UTC+2 (EET)</option>
+                                        <option value="UTC+3">UTC+3 (MSK)</option>
+                                        <option value="UTC+4">UTC+4 (GST)</option>
+                                        <option value="UTC+5">UTC+5 (PKT)</option>
+                                        <option value="UTC+6">UTC+6 (BST)</option>
+                                        <option value="UTC+7">UTC+7 (ICT)</option>
+                                        <option value="UTC+8">UTC+8 (CST)</option>
+                                        <option value="UTC+9">UTC+9 (JST)</option>
+                                        <option value="UTC+10">UTC+10 (AEST)</option>
+                                        <option value="UTC+11">UTC+11 (SBT)</option>
+                                        <option value="UTC+12">UTC+12 (NZST)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="comments">Additional Comments or Requirements</label>
+                                <textarea id="comments" name="comments" rows="4" placeholder="Please share any specific requirements, accessibility needs, or questions you have about the course..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Communication Preferences</h3>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="newsletter" name="newsletter">
+                                    <span class="checkmark"></span>
+                                    <span>Subscribe to our newsletter for course updates and new offerings</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Terms and Conditions</h3>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="terms" name="terms" required>
+                                    <span class="checkmark"></span>
+                                    <span>I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="privacy-link">Privacy Policy</a> *</span>
+                                </label>
+                                <div class="error-message" id="termsError"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" onclick="goBack()">
+                                <i class="fas fa-arrow-left"></i>
+                                Cancel
+                            </button>
+                            <button type="submit" class="btn btn-primary" id="submitEnrollment">
+                                <i class="fas fa-check"></i>
+                                Complete Enrollment
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content success-modal">
+            <div class="modal-header success-header">
+                <i class="fas fa-check-circle"></i>
+                <h3>Enrollment Successful!</h3>
+            </div>
+            <div class="modal-body">
+                <p>Thank you for enrolling in the course. You will receive a confirmation email shortly with further instructions.</p>
+                <div class="success-details">
+                    <h4>What's Next?</h4>
+                    <ul>
+                        <li>Check your email for course access details</li>
+                        <li>Join our learning community</li>
+                        <li>Prepare for your learning journey</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="goToCatalog()">
+                    <i class="fas fa-graduation-cap"></i>
+                    View More Courses
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="enrollment.js"></script>
+</body>
+</html>
+
+

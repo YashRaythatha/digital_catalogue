@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FY26 GPS Course Catalog - Digital Catalogue</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h1>FY26 GPS Course Catalog</h1>
+                </div>
+                <div class="header-actions">
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="headerSearchInput" placeholder="Search courses...">
+                    </div>
+                    <button class="export-btn" id="exportPdfBtn" title="Export to PDF">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>Export PDF</span>
+                    </button>
+                    <button class="export-btn" id="testLabsBtn" title="Test Lab Data" style="background: #28a745; margin-left: 10px;">
+                        <i class="fas fa-flask"></i>
+                        <span>Test Labs</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fas fa-star"></i>
+                        <span>Premium Learning Experience</span>
+                    </div>
+                    <h1 class="hero-title">
+                        Master the Future of
+                        <span class="gradient-text">Technology</span>
+                    </h1>
+                    <p class="hero-description">
+                        Transform your career with our comprehensive training programs in Microsoft technologies, AI solutions, and cutting-edge development practices. Join thousands of professionals who've accelerated their expertise.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="97">0</div>
+                            <div class="stat-label">Expert Courses</div>
+                        </div>
+                    </div>
+                    <div class="hero-actions">
+                        <button class="btn-hero btn-hero-primary" onclick="document.getElementById('coursesGrid').scrollIntoView({behavior: 'smooth'})">
+                            <i class="fas fa-rocket"></i>
+                            Explore Courses
+                        </button>
+                        <button class="btn-hero btn-hero-secondary" onclick="document.getElementById('exportPdfBtn').click()">
+                            <i class="fas fa-download"></i>
+                            Download Catalog
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="floating-cards">
+                        <div class="floating-card card-1">
+                            <i class="fas fa-brain"></i>
+                            <span>AI & ML</span>
+                        </div>
+                        <div class="floating-card card-2">
+                            <i class="fas fa-cloud"></i>
+                            <span>Azure</span>
+                        </div>
+                        <div class="floating-card card-3">
+                            <i class="fas fa-code"></i>
+                            <span>DevOps</span>
+                        </div>
+                        <div class="floating-card card-4">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Security</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="catalogue-header">
+                <h2>Professional Development Courses</h2>
+                <p>Comprehensive training programs designed to accelerate your expertise in Microsoft technologies and AI solutions</p>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-controls">
+                    <div class="filter-options">
+                        <!-- Filter Toggle Button -->
+                        <button class="filter-toggle-btn" id="filterToggleBtn">
+                            <i class="fas fa-filter"></i>
+                            <span>Filters</span>
+                            <i class="fas fa-bars" id="filterIcon"></i>
+                        </button>
+                        
+                        <div class="sort-dropdown">
+                            <select id="sortSelect">
+                                <option value="default">Sort by Default</option>
+                                <option value="rating">Highest Rated</option>
+                                <option value="duration">Shortest Duration</option>
+                                <option value="price">Price Low to High</option>
+                                <option value="difficulty">Difficulty Level</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-chips" id="filterChips"></div>
+                    </div>
+                </div>
+                
+                <!-- Sidebar Overlay -->
+                <div class="sidebar-overlay" id="sidebarOverlay"></div>
+                
+                <!-- Filter Sidebar -->
+                <div class="filter-sidebar" id="filterSidebar">
+                    <div class="sidebar-header">
+                        <h3>Filter Courses</h3>
+                        <button class="sidebar-close-btn" id="sidebarCloseBtn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="sidebar-content">
+                        <!-- Category Filter -->
+                        <div class="filter-section">
+                            <h4>Category</h4>
+                            <div class="filter-tabs">
+                                <button class="filter-tab active" data-category="all">
+                                    <i class="fas fa-th"></i>
+                                    <span>All Courses</span>
+                                    <span class="tab-count" id="allCount">97</span>
+                                </button>
+                                <button class="filter-tab" data-category="azure-migration">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <span>Azure Migration</span>
+                                    <span class="tab-count" id="azure-migrationCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-category="fabric">
+                                    <i class="fas fa-cube"></i>
+                                    <span>Microsoft Fabric</span>
+                                    <span class="tab-count" id="fabricCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-category="agentic-ai">
+                                    <i class="fas fa-brain"></i>
+                                    <span>Agentic AI</span>
+                                    <span class="tab-count" id="agentic-aiCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-category="security">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>Security</span>
+                                    <span class="tab-count" id="securityCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-category="ai-business">
+                                    <i class="fas fa-robot"></i>
+                                    <span>AI Business Solutions</span>
+                                    <span class="tab-count" id="ai-businessCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-category="cross-solution">
+                                    <i class="fas fa-link"></i>
+                                    <span>Cross-Solution</span>
+                                    <span class="tab-count" id="cross-solutionCount">0</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Skilling Level Filter -->
+                        <div class="filter-section">
+                            <h4>Skilling Level</h4>
+                            <div class="filter-tabs">
+                                <button class="filter-tab active" data-skilling="all">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>All Levels</span>
+                                    <span class="tab-count" id="allSkillingCount">97</span>
+                                </button>
+                                <button class="filter-tab" data-skilling="Sales Ready">
+                                    <i class="fas fa-handshake"></i>
+                                    <span>Sales Ready</span>
+                                    <span class="tab-count" id="SalesReadyCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-skilling="Tech deal Ready">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>Tech Deal Ready</span>
+                                    <span class="tab-count" id="TechdealReadyCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-skilling="Project Ready">
+                                    <i class="fas fa-tools"></i>
+                                    <span>Project Ready</span>
+                                    <span class="tab-count" id="ProjectReadyCount">0</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Lab Type Filter -->
+                        <div class="filter-section">
+                            <h4>Lab Type</h4>
+                            <div class="filter-tabs">
+                                <button class="filter-tab active" data-lab="all">
+                                    <i class="fas fa-flask"></i>
+                                    <span>All Labs</span>
+                                    <span class="tab-count" id="allLabCount">97</span>
+                                </button>
+                                <button class="filter-tab" data-lab="Skillable">
+                                    <i class="fas fa-laptop-code"></i>
+                                    <span>Skillable</span>
+                                    <span class="tab-count" id="skillableCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-lab="Simulated">
+                                    <i class="fas fa-desktop"></i>
+                                    <span>Simulated</span>
+                                    <span class="tab-count" id="simulatedCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-lab="Spektra">
+                                    <i class="fas fa-rocket"></i>
+                                    <span>Spektra</span>
+                                    <span class="tab-count" id="spektraCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-lab="Custom">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>Custom</span>
+                                    <span class="tab-count" id="customCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-lab="Yes">
+                                    <i class="fas fa-flask"></i>
+                                    <span>Hands-on Labs</span>
+                                    <span class="tab-count" id="yesLabCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-lab="Skillable + Simulated">
+                                    <i class="fas fa-layer-group"></i>
+                                    <span>Skillable + Simulated</span>
+                                    <span class="tab-count" id="skillableSimulatedCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-lab="Interactive Simulated Lab">
+                                    <i class="fas fa-play-circle"></i>
+                                    <span>Interactive Simulated</span>
+                                    <span class="tab-count" id="interactiveSimulatedCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-lab="No">
+                                    <i class="fas fa-times-circle"></i>
+                                    <span>No Labs</span>
+                                    <span class="tab-count" id="noLabCount">0</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Solution Area Filter -->
+                        <div class="filter-section">
+                            <h4>Solution Area</h4>
+                            <div class="filter-tabs">
+                                <button class="filter-tab active" data-solution-area="all">
+                                    <i class="fas fa-th"></i>
+                                    <span>All Areas</span>
+                                    <span class="tab-count" id="allSolutionAreaCount">97</span>
+                                </button>
+                                <button class="filter-tab" data-solution-area="AI Business Solutions">
+                                    <i class="fas fa-brain"></i>
+                                    <span>AI Business Solutions</span>
+                                    <span class="tab-count" id="aiBusinessSolutionsCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-solution-area="Cloud and AI Platform">
+                                    <i class="fas fa-cloud"></i>
+                                    <span>Cloud and AI Platform</span>
+                                    <span class="tab-count" id="cloudAiPlatformCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-solution-area="Security">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>Security</span>
+                                    <span class="tab-count" id="securityAreaCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-solution-area="X-Solution">
+                                    <i class="fas fa-puzzle-piece"></i>
+                                    <span>X-Solution</span>
+                                    <span class="tab-count" id="xSolutionCount">0</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Solution Play Filter -->
+                        <div class="filter-section">
+                            <h4>Solution Play</h4>
+                            <div class="filter-tabs">
+                                <button class="filter-tab active" data-solution-play="all">
+                                    <i class="fas fa-th"></i>
+                                    <span>All Plays</span>
+                                    <span class="tab-count" id="allSolutionPlayCount">97</span>
+                                </button>
+                                <button class="filter-tab" data-solution-play="AI + Agents">
+                                    <i class="fas fa-robot"></i>
+                                    <span>AI + Agents</span>
+                                    <span class="tab-count" id="aiAgentsCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-solution-play="All Solution Areas">
+                                    <i class="fas fa-globe"></i>
+                                    <span>All Solution Areas</span>
+                                    <span class="tab-count" id="allSolutionAreasCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-solution-play="Converged Comm">
+                                    <i class="fas fa-phone"></i>
+                                    <span>Converged Comm</span>
+                                    <span class="tab-count" id="convergedCommCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-solution-play="Copilot and Agents">
+                                    <i class="fas fa-user-tie"></i>
+                                    <span>Copilot and Agents</span>
+                                    <span class="tab-count" id="copilotAgentsCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-solution-play="Data Security">
+                                    <i class="fas fa-lock"></i>
+                                    <span>Data Security</span>
+                                    <span class="tab-count" id="dataSecurityCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-solution-play="ERP Transformation">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>ERP Transformation</span>
+                                    <span class="tab-count" id="erpTransformationCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-solution-play="Innovate with Azure AI">
+                                    <i class="fas fa-robot"></i>
+                                    <span>Innovate with Azure AI</span>
+                                    <span class="tab-count" id="innovateAzureAiCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-solution-play="Low Code AI">
+                                    <i class="fas fa-code"></i>
+                                    <span>Low Code AI</span>
+                                    <span class="tab-count" id="lowCodeAiCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-solution-play="Migrate & Modernize">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <span>Migrate & Modernize</span>
+                                    <span class="tab-count" id="migrateModernizeCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-solution-play="Protect Cloud & AI">
+                                    <i class="fas fa-shield-virus"></i>
+                                    <span>Protect Cloud & AI</span>
+                                    <span class="tab-count" id="protectCloudAiCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-solution-play="Sales Transformation">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>Sales Transformation</span>
+                                    <span class="tab-count" id="salesTransformationCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-solution-play="Scale Business Ops">
+                                    <i class="fas fa-expand-arrows-alt"></i>
+                                    <span>Scale Business Ops</span>
+                                    <span class="tab-count" id="scaleBusinessOpsCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-solution-play="Scale with Cloud & AI">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <span>Scale with Cloud & AI</span>
+                                    <span class="tab-count" id="scaleCloudAiCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-solution-play="Secure AI Productivity">
+                                    <i class="fas fa-user-shield"></i>
+                                    <span>Secure AI Productivity</span>
+                                    <span class="tab-count" id="secureAiProductivityCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-solution-play="Service Transformation">
+                                    <i class="fas fa-concierge-bell"></i>
+                                    <span>Service Transformation</span>
+                                    <span class="tab-count" id="serviceTransformationCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-solution-play="Unify Data Platform">
+                                    <i class="fas fa-database"></i>
+                                    <span>Unify Data Platform</span>
+                                    <span class="tab-count" id="unifyDataPlatformCount">0</span>
+                                </button>
+                                <button class="filter-tab" data-solution-play="Modern SecOps">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>Modern SecOps</span>
+                                    <span class="tab-count" id="modernSecOpsCount">0</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div> <!-- End of sidebar-content -->
+                </div> <!-- End of filter-sidebar -->
+            </div>
+
+            <div class="courses-grid" id="coursesGrid">
+                <!-- Course cards will be dynamically generated here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Course Details Modal -->
+    <div class="modal" id="courseModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle"></h3>
+                <button class="close-btn" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="course-details">
+                    <div class="detail-section">
+                        <h4>Description</h4>
+                        <p id="modalDescription"></p>
+                    </div>
+                    <div class="detail-section">
+                        <h4>Duration</h4>
+                        <p id="modalDuration"></p>
+                    </div>
+                    <div class="detail-section">
+                        <h4>Prerequisites</h4>
+                        <p id="modalPrerequisites"></p>
+                    </div>
+                    <div class="detail-section">
+                        <h4>Learning Objectives</h4>
+                        <ul id="modalObjectives"></ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4>Target Audience</h4>
+                        <p id="modalAudience"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="enrollBtn">Enroll Now</button>
+                <button class="btn btn-secondary" id="downloadSyllabus">Download Syllabus</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js?v=3"></script>
+</body>
+</html>
