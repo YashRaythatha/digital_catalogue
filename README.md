@@ -187,7 +187,7 @@ This project is part of Microsoft's FY26 GPS program. Please refer to Microsoft'
 
 ## 📞 Support
 
-For technical support or questions about the course catalog, please contact the Microsoft GPS team.
+For technical support or questions about the course catalog.
 
 ## 🔄 Version History
 
