@@ -1,6 +1,6 @@
 // Test function to ensure global scope
 
-// Course data based on the provided information from FY26 GPS course catalog
+// Course data based on professional development course catalog
 // Lab information will be loaded from JSONL file
 let courses = [
     {
@@ -2980,6 +2980,170 @@ let activeFilters = [];
 let currentSolutionArea = 'all';
 let currentSolutionPlay = 'all';
 
+// Apply filters function
+function applyFilters() {
+    // Update filter chips display
+    updateFilterChips();
+    
+    // Render courses with current filters
+    renderCourses();
+}
+
+// Update filter chips to show active filters
+function updateFilterChips() {
+    if (!filterChips) return;
+    
+    const chips = [];
+    
+    // Add active filter chips
+    if (currentFilter !== 'all') {
+        const filterName = getFilterDisplayName('category', currentFilter);
+        chips.push(createFilterChip('category', currentFilter, filterName));
+    }
+    
+    if (currentSkilling !== 'all') {
+        const filterName = getFilterDisplayName('skilling', currentSkilling);
+        chips.push(createFilterChip('skilling', currentSkilling, filterName));
+    }
+    
+    if (currentLab !== 'all') {
+        const filterName = getFilterDisplayName('lab', currentLab);
+        chips.push(createFilterChip('lab', currentLab, filterName));
+    }
+    
+    if (currentSolutionArea !== 'all') {
+        const filterName = getFilterDisplayName('solutionArea', currentSolutionArea);
+        chips.push(createFilterChip('solutionArea', currentSolutionArea, filterName));
+    }
+    
+    if (currentSolutionPlay !== 'all') {
+        const filterName = getFilterDisplayName('solutionPlay', currentSolutionPlay);
+        chips.push(createFilterChip('solutionPlay', currentSolutionPlay, filterName));
+    }
+    
+    filterChips.innerHTML = chips.join('');
+    
+    // Add event listeners to remove chips
+    filterChips.querySelectorAll('.filter-chip-remove').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const filterType = this.dataset.filterType;
+            const filterValue = this.dataset.filterValue;
+            removeFilter(filterType, filterValue);
+        });
+    });
+}
+
+// Create a filter chip element
+function createFilterChip(filterType, filterValue, displayName) {
+    return `
+        <div class="filter-chip">
+            <span class="filter-chip-text">${displayName}</span>
+            <button class="filter-chip-remove" data-filter-type="${filterType}" data-filter-value="${filterValue}">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    `;
+}
+
+// Get display name for filter
+function getFilterDisplayName(filterType, filterValue) {
+    const displayNames = {
+        category: {
+            'azure-migration': 'Cloud Migration',
+            'fabric': 'Data Platform',
+            'agentic-ai': 'Agentic AI',
+            'security': 'Security',
+            'ai-business': 'AI Business Solutions',
+            'cross-solution': 'Cross-Solution'
+        },
+        skilling: {
+            'Sales Ready': 'Sales Ready',
+            'Tech deal Ready': 'Tech Deal Ready',
+            'Project Ready': 'Project Ready'
+        },
+        lab: {
+            'Skillable': 'Skillable',
+            'Simulated': 'Simulated',
+            'Spektra': 'Spektra',
+            'Custom': 'Custom',
+            'Yes': 'Hands-on Labs',
+            'Skillable + Simulated': 'Skillable + Simulated',
+            'Interactive Simulated Lab': 'Interactive Simulated',
+            'No': 'No Labs'
+        },
+        solutionArea: {
+            'AI Business Solutions': 'AI Business Solutions',
+            'Cloud and AI Platform': 'Cloud and AI Platform',
+            'Security': 'Security',
+            'X-Solution': 'X-Solution'
+        },
+        solutionPlay: {
+            'AI + Agents': 'AI + Agents',
+            'All Solution Areas': 'All Solution Areas',
+            'Converged Comm': 'Converged Comm',
+            'Copilot and Agents': 'Copilot and Agents',
+            'Data Security': 'Data Security',
+            'ERP Transformation': 'ERP Transformation',
+            'Innovate with Azure AI': 'Innovate with Azure AI',
+            'Low Code AI': 'Low Code AI',
+            'Migrate & Modernize': 'Migrate & Modernize',
+            'Protect Cloud & AI': 'Protect Cloud & AI',
+            'Sales Transformation': 'Sales Transformation',
+            'Scale Business Ops': 'Scale Business Ops',
+            'Scale with Cloud & AI': 'Scale with Cloud & AI',
+            'Secure AI Productivity': 'Secure AI Productivity',
+            'Service Transformation': 'Service Transformation',
+            'Unify Data Platform': 'Unify Data Platform',
+            'Modern SecOps': 'Modern SecOps'
+        }
+    };
+    
+    return displayNames[filterType]?.[filterValue] || filterValue;
+}
+
+// Remove a specific filter
+function removeFilter(filterType, filterValue) {
+    switch (filterType) {
+        case 'category':
+            currentFilter = 'all';
+            document.querySelectorAll('.filter-tab[data-category]').forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.dataset.category === 'all') tab.classList.add('active');
+            });
+            break;
+        case 'skilling':
+            currentSkilling = 'all';
+            document.querySelectorAll('.filter-tab[data-skilling]').forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.dataset.skilling === 'all') tab.classList.add('active');
+            });
+            break;
+        case 'lab':
+            currentLab = 'all';
+            document.querySelectorAll('.filter-tab[data-lab]').forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.dataset.lab === 'all') tab.classList.add('active');
+            });
+            break;
+        case 'solutionArea':
+            currentSolutionArea = 'all';
+            document.querySelectorAll('.filter-tab[data-solution-area]').forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.dataset.solutionArea === 'all') tab.classList.add('active');
+            });
+            break;
+        case 'solutionPlay':
+            currentSolutionPlay = 'all';
+            document.querySelectorAll('.filter-tab[data-solution-play]').forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.dataset.solutionPlay === 'all') tab.classList.add('active');
+            });
+            break;
+    }
+    
+    applyFilters();
+}
+
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize with default lab data (will be overridden by Excel data)
@@ -3012,10 +3176,16 @@ document.addEventListener('DOMContentLoaded', function() {
 // Setup event listeners
 function setupEventListeners() {
     // Enhanced search functionality
-    headerSearchInput.addEventListener('input', function(e) {
-        currentSearch = e.target.value.toLowerCase();
-        renderCourses();
-    });
+    if (headerSearchInput) {
+        console.log('Search input found, setting up event listener');
+        headerSearchInput.addEventListener('input', function(e) {
+            currentSearch = e.target.value.toLowerCase();
+            console.log('Search triggered:', currentSearch);
+            renderCourses();
+        });
+    } else {
+        console.error('Search input element not found!');
+    }
 
     // Sort functionality
     sortSelect.addEventListener('change', function(e) {
@@ -3117,6 +3287,11 @@ function renderCourses() {
             (course.labType && course.labType.toLowerCase().includes(currentSearch)) ||
             (course.solutionArea && course.solutionArea.toLowerCase().includes(currentSearch)) ||
             (course.solutionPlay && course.solutionPlay.toLowerCase().includes(currentSearch));
+        
+        // Debug search (only log first few results to avoid spam)
+        if (currentSearch && currentSearch.length > 0 && Math.random() < 0.1) {
+            console.log(`Searching for "${currentSearch}" in course "${course.title}":`, matchesSearch);
+        }
         
         return matchesFilter && matchesSkilling && matchesLab && matchesSolutionArea && matchesSolutionPlay && matchesSearch;
     });
@@ -3841,11 +4016,11 @@ async function exportToPDF() {
             doc.setFontSize(8);
             doc.setTextColor(128, 128, 128);
             doc.text(`Page ${i} of ${pageCount}`, 20, 290);
-            doc.text('Generated by FY26 GPS Course Catalog', 150, 290);
+            doc.text('Generated by Professional Course Catalog', 150, 290);
         }
         
         // Save the PDF
-        const fileName = `FY26_GPS_Course_Catalog_${new Date().toISOString().split('T')[0]}.pdf`;
+        const fileName = `Professional_Course_Catalog_${new Date().toISOString().split('T')[0]}.pdf`;
         doc.save(fileName);
         
         // Reset button state
@@ -4007,7 +4182,7 @@ function setCategoryFilter(category) {
     }
     
     // Update current category
-    currentCategory = category;
+    currentFilter = category;
     
     // Apply filters
     applyFilters();
@@ -4035,7 +4210,7 @@ function setSkillingFilter(skilling) {
 // Reset all filters to default
 function resetAllFilters() {
     // Reset filter variables
-    currentCategory = 'all';
+    currentFilter = 'all';
     currentSkilling = 'all';
     currentLab = 'all';
     currentSolutionArea = 'all';

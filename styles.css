@@ -137,6 +137,7 @@ body::before {
     display: flex;
     align-items: center;
     transition: all 0.3s ease;
+    order: -1; /* Place search first in the filter options */
 }
 
 .search-container i {
@@ -717,28 +718,26 @@ body::before {
 
 
 
-/* Header Search Input */
+/* Search Input in Filter Section */
 #headerSearchInput {
-    padding: 14px 16px 14px 44px;
-    border: none;
+    padding: 12px 16px 12px 44px;
+    border: 2px solid #e2e8f0;
     border-radius: 25px;
-    width: 320px;
+    width: 280px;
     font-size: 14px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 20px rgba(30, 64, 175, 0.15);
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     font-family: 'Inter', sans-serif;
-    border: 1px solid rgba(59, 130, 246, 0.2);
     position: relative;
 }
 
 #headerSearchInput:focus {
     outline: none;
-    box-shadow: 0 8px 25px rgba(30, 64, 175, 0.25);
-    transform: translateY(-2px);
-    width: 340px;
-    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+    transform: translateY(-1px);
+    width: 300px;
+    background: #ffffff;
     border-color: #3b82f6;
 }
 
@@ -1592,7 +1591,13 @@ body::before {
 
     #headerSearchInput {
         width: 100%;
-        max-width: 300px;
+        max-width: 250px;
+    }
+    
+    .search-container {
+        order: 0; /* Reset order for mobile */
+        width: 100%;
+        margin-bottom: 1rem;
     }
 
     .hero-section {

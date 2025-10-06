@@ -1,6 +1,6 @@
-# FY26 GPS Course Catalog - Digital Catalogue
+# Professional Course Catalog - Digital Catalogue
 
-A modern, interactive digital catalogue for Microsoft's FY26 GPS (Global Partner Solutions) course offerings. This web application provides an intuitive interface for browsing, filtering, and exploring professional development courses in Microsoft technologies, AI solutions, and cutting-edge development practices.
+A modern, interactive digital catalogue for professional development course offerings. This web application provides an intuitive interface for browsing, filtering, and exploring professional development courses in modern technologies, AI solutions, and cutting-edge development practices.
 
 ## 🚀 Features
 
@@ -38,8 +38,8 @@ digital_catalogue/
 
 The catalogue includes courses across multiple categories:
 
-- **Azure Migration**: Cloud migration and modernization strategies
-- **Microsoft Fabric**: Data platform and analytics solutions
+- **Cloud Migration**: Cloud migration and modernization strategies
+- **Data Platform**: Data platform and analytics solutions
 - **Agentic AI**: AI agents and automation technologies
 - **Security**: Cybersecurity and threat protection
 - **AI Business Solutions**: AI-powered business applications
@@ -183,11 +183,11 @@ Edit `styles.css` to customize:
 
 ## 📄 License
 
-This project is part of Microsoft's FY26 GPS program. Please refer to Microsoft's licensing terms for usage guidelines.
+This project is for educational and professional development purposes. Please refer to the appropriate licensing terms for usage guidelines.
 
 ## 📞 Support
 
-For technical support or questions about the course catalog.
+For technical support or questions about the course catalog, please contact the development team.
 
 ## 🔄 Version History
 
@@ -198,4 +198,4 @@ For technical support or questions about the course catalog.
 
 ---
 
-**Note**: This digital catalogue is designed for Microsoft's Global Partner Solutions program and contains proprietary course information. Please ensure compliance with Microsoft's usage policies when deploying or modifying this application.
+**Note**: This digital catalogue is designed for professional development and contains course information. Please ensure compliance with appropriate usage policies when deploying or modifying this application.

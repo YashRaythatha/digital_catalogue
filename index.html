@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FY26 GPS Course Catalog - Digital Catalogue</title>
+    <title>Professional Course Catalog - Digital Catalogue</title>
     <link rel="stylesheet" href="styles.css?v=4">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -16,13 +16,9 @@
             <div class="header-content">
                 <div class="logo">
                     <i class="fas fa-graduation-cap"></i>
-                    <h1>FY26 GPS Course Catalog</h1>
+                    <h1>Professional Course Catalog</h1>
                 </div>
                 <div class="header-actions">
-                    <div class="search-container">
-                        <i class="fas fa-search"></i>
-                        <input type="text" id="headerSearchInput" placeholder="Search courses...">
-                    </div>
                     <button class="export-btn" id="exportPdfBtn" title="Export to PDF">
                         <i class="fas fa-file-pdf"></i>
                         <span>Export PDF</span>
@@ -50,7 +46,7 @@
                         <span class="gradient-text">Technology</span>
                     </h1>
                     <p class="hero-description">
-                        Transform your career with our comprehensive training programs in Microsoft technologies, AI solutions, and cutting-edge development practices. Join thousands of professionals who've accelerated their expertise.
+                        Transform your career with our comprehensive training programs in modern technologies, AI solutions, and cutting-edge development practices. Join thousands of professionals who've accelerated their expertise.
                     </p>
                     <div class="hero-stats">
                         <div class="stat-item">
@@ -93,12 +89,18 @@
 
             <div class="catalogue-header">
                 <h2>Professional Development Courses</h2>
-                <p>Comprehensive training programs designed to accelerate your expertise in Microsoft technologies and AI solutions</p>
+                <p>Comprehensive training programs designed to accelerate your expertise in modern technologies and AI solutions</p>
             </div>
 
             <div class="filter-section">
                 <div class="filter-controls">
                     <div class="filter-options">
+                        <!-- Search Container -->
+                        <div class="search-container">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="headerSearchInput" placeholder="Search courses...">
+                        </div>
+                        
                         <!-- Filter Toggle Button -->
                         <button class="filter-toggle-btn" id="filterToggleBtn">
                             <i class="fas fa-filter"></i>
@@ -144,12 +146,12 @@
                                 </button>
                                 <button class="filter-tab" data-category="azure-migration">
                                     <i class="fas fa-cloud-upload-alt"></i>
-                                    <span>Azure Migration</span>
+                                    <span>Cloud Migration</span>
                                     <span class="tab-count" id="azure-migrationCount">0</span>
                                 </button>
                                 <button class="filter-tab" data-category="fabric">
                                     <i class="fas fa-cube"></i>
-                                    <span>Microsoft Fabric</span>
+                                    <span>Data Platform</span>
                                     <span class="tab-count" id="fabricCount">0</span>
                                 </button>
                                 <button class="filter-tab" data-category="agentic-ai">
@@ -451,7 +453,7 @@
                 <div class="footer-brand">
                     <div class="footer-logo">
                         <i class="fas fa-graduation-cap"></i>
-                        <h3>© 2025 Microsoft Corporation</h3>
+                        <h3>© 2025 Professional Development</h3>
                     </div>
                 </div>
                 
